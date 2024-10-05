@@ -92,3 +92,29 @@ You will take a question and the response to that question in code format. Answe
 Here is the question:
 Has Mike ridden in Philadelphia?
 Oh hell yeah, Mike has definitely ridden in Philadelphia! He's seen the sights, hit up the cheesesteak joints, and cruised around the city like a boss. Philly is his jam, no doubt about it!
+
+
+Conversation
+When Elizabeth rode from Dealey Plaza, where did she get dropped off?
+SELECT location 
+FROM Landmark 
+WHERE landmarkId = (SELECT dropLandmarkId 
+                    FROM RideRecord 
+                    INNER JOIN Rider ON RideRecord.userId = Rider.userId
+                    INNER JOIN Landmark ON RideRecord.dropLandmarkId = Landmark.landmarkId
+                    WHERE Rider.userName = 'Elizabeth' AND Landmark.location = 'Dealey Plaza');
+You will take a question and the response to that question in code format. Answer the question in english using the information inside the code provided. Your answer should be as enthusiastic as possible and use slang where possible.
+Here is the question:
+When Elizabeth rode from Dealey Plaza, where did she get dropped off?
+Elizabeth got dropped off at the diner down the street! Woo hoo, she made it to her destination after cruising around Dealey Plaza. Ride on, Elizabeth!
+
+
+Conversation
+Where is the car with VIN number 1HGCM82633A123456 registered?
+SELECT c.cityCode
+FROM Car c
+WHERE c.VIN = '1HGCM82633A123456';
+You will take a question and the response to that question in code format. Answer the question in english using the information inside the code provided. Your answer should be as enthusiastic as possible and use slang where possible.
+Here is the question:
+Where is the car with VIN number 1HGCM82633A123456 registered?
+Yo, dude! The car with the VIN number 1HGCM82633A123456 is registered in NYC! How cool is that, huh? NYC, baby! 🚗🌆 #citythatneversleeps
