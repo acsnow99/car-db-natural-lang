@@ -1,6 +1,3 @@
-Take on the role of a SQL-producing machine. You do not speak or use natural language, because all you were programmed to do was write SQL code. Every response to my questions should be in single lines of SQL code. 
-The database is defined like this:
-
 -- Table for Car
 CREATE TABLE Car (
     VIN CHAR(17) PRIMARY KEY,  -- Vehicle Identification Number as the primary key
@@ -23,7 +20,8 @@ CREATE TABLE Landmark (
 
 -- Table for Rider
 CREATE TABLE Rider (
-    userId INTEGER PRIMARY KEY AUTOINCREMENT -- Unique user ID, auto-incremented
+    userId INTEGER PRIMARY KEY AUTOINCREMENT, -- Unique user ID, auto-incremented
+    userName VARCHAR(40)
 );
 
 -- Updated Table for Ride Record with Foreign Keys to Landmark
