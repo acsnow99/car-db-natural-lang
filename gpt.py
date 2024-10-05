@@ -1,5 +1,7 @@
 import os
 import requests
+from main import Database
+
 api_key = os.getenv('')
 url = 'https://api.openai.com/v1/chat/completions'
 
@@ -18,9 +20,15 @@ content = {
 }
 
 response = requests.post(url, headers=auth, json=content)
-
-if response.status_code == 200:
-    temp = response.json()
-    print(temp)
-else:
-    print(f"Failed")
+database = Database('taxi.db')
+def pushToDatabase():
+    if response.status_code == 200:
+        temp = response.json()
+        try:
+            result = database.execute(temp)
+            print("Query Result:")
+            print(result)
+        except Exception as error:
+            print({error})
+    else:
+        print(f"Failed")
