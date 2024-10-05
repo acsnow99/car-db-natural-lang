@@ -1,7 +1,8 @@
 import requests
 from db import Database
+from utils import get_api_key
 
-api_key = ''
+api_key = get_api_key('./config.json');
 url = 'https://api.openai.com/v1/chat/completions'
 
 auth = {
