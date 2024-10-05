@@ -1,6 +1,26 @@
 
 import sqlite3
 import os
+import sys
+
+def main(prompt_file):
+    if (os.path.exists('taxi.db')):
+        os.remove('taxi.db')
+    database = Database('taxi.db')
+    database.run_script('./sqlite/init.sql')
+
+    compile_prompt(prompt_file)
+
+def test():
+    if (os.path.exists('taxi.db')):
+        os.remove('taxi.db')
+    database = Database('taxi.db')
+    database.run_script('./sqlite/init.sql')
+
+    print(database.execute('SELECT location FROM Landmark WHERE landmarkId = 3;'))
+
+
+
 
 class Database:
     def __init__(self, connection_string):
@@ -33,10 +53,18 @@ class Database:
         return self.execute(init_command, True)
 
 
-if (os.path.exists('taxi.db')):
-    os.remove('taxi.db')
-database = Database('taxi.db')
-database.run_script('./sqlite/init.sql')
+def compile_prompt(prompt_file_name = './prompts/simple.txt'):
+    with open('./prompts/init.txt') as init_file:
+        init_prompt = init_file.read()
+    with open(prompt_file_name) as prompt_file:
+        core_prompt = prompt_file.read()
 
-print(database.execute('SELECT * FROM RideRecord;'))
+    return init_prompt + '\n' + core_prompt
 
+
+
+
+if (len(sys.argv)) > 1:
+    main(sys.argv[1])
+else:
+    main()
