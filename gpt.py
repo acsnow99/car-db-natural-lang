@@ -16,7 +16,7 @@ database = Database('taxi.db')
 
 def takingPrompt(prompt) -> str:
     response = requests.post(url, headers=auth, json={
-    "model": "gpt-4",
+    "model": "gpt-3.5-turbo",
     "messages": [
         {"role": "system", "content": "haha"},
         {"role": "user", "content": f"{prompt}"}
