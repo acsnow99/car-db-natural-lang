@@ -2,14 +2,14 @@
 import sqlite3
 import os
 import sys
+from gpt import takingPrompt
 
 def main(prompt_file):
     if (os.path.exists('taxi.db')):
         os.remove('taxi.db')
     database = Database('taxi.db')
     database.run_script('./sqlite/init.sql')
-
-    compile_prompt(prompt_file)
+    takingPrompt(compile_prompt(prompt_file))
 
 def test():
     if (os.path.exists('taxi.db')):
@@ -67,4 +67,4 @@ def compile_prompt(prompt_file_name = './prompts/simple.txt'):
 if (len(sys.argv)) > 1:
     main(sys.argv[1])
 else:
-    main()
+    main(prompt_file='./prompts/simple.txt')

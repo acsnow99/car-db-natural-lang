@@ -32,3 +32,23 @@ def pushToDatabase():
             print({error})
     else:
         print(f"Failed")
+
+def takingPrompt(prompt):
+    response = requests.post(url, headers=auth, json={
+    "model": "gpt-4",
+    "messages": [ 
+        {"role": "system", "content": "haha"},
+        {"role": "user", "content": {prompt}}
+    ],
+    "max_tokens": 100
+    })
+    if response.status_code == 200:
+        temp = response.json()
+        try:
+            result = database.execute(temp)
+            print("Query Result:")
+            print(result)
+        except Exception as error:
+            print({error})
+    else:
+        print(f"Failed")
