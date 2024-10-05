@@ -12,7 +12,7 @@ def main(prompt_file):
         os.remove('taxi.db')
     database = Database('taxi.db')
     database.run_script('./sqlite/init.sql')
-    takingPrompt(compile_prompt('./prompts/init_response.txt') + database.execute(takingPrompt(compile_prompt(prompt_file_name = prompt_file)))) 
+    print(takingPrompt(compile_prompt('./prompts/init_response.txt', '') + str(database.execute(takingPrompt(compile_prompt(prompt_file_name = prompt_file))))))
 
 
 def test():

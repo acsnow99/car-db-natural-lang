@@ -11,8 +11,10 @@ auth = {
 }
 
 database = Database('taxi.db')
+    
 
-def takingPrompt(prompt):
+
+def takingPrompt(prompt) -> str:
     response = requests.post(url, headers=auth, json={
     "model": "gpt-4",
     "messages": [
@@ -23,13 +25,10 @@ def takingPrompt(prompt):
     })
 
     if response.status_code == 200:
-        print(f"Failed {response}")
         temp = response.json()["choices"][0]["message"]["content"]
         try:
-            result = database.execute(temp)
-            print("Query Result:")
-            print(result)
+            return temp
         except Exception as error:
             print({error})
     else:
-        print(f"Failed {response.status_code}")
+        return f"Failed {response.status_code}"
