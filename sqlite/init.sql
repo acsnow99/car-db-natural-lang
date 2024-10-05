@@ -20,7 +20,8 @@ CREATE TABLE Landmark (
 
 -- Table for Rider
 CREATE TABLE Rider (
-    userId INTEGER PRIMARY KEY AUTOINCREMENT -- Unique user ID, auto-incremented
+    userId INTEGER PRIMARY KEY AUTOINCREMENT, -- Unique user ID, auto-incremented
+    userName VARCHAR(40)
 );
 
 -- Updated Table for Ride Record with Foreign Keys to Landmark
@@ -81,17 +82,18 @@ INSERT INTO Car (VIN, cityCode, licensePlate) VALUES
 ('1HGCM82633A123455', 'BOS', 'BO1234');
 
 -- Insert statements for the Rider table
-INSERT INTO Rider (userId) VALUES
-(1),
-(2),
-(3),
-(4),
-(5),
-(6),
-(7),
-(8),
-(9),
-(10);
+INSERT INTO Rider (userName) VALUES
+('Mike'),
+('Dave'),
+('John Jacob Jinkleheimer Schmidt'),
+('Jason'),
+('Alex'),
+('Allyson'),
+('Elizabeth'),
+('Me Myself Aye'),
+('Edward Scissorhands'),
+('Ash Ketchum'),
+('Another Person');
 
 -- Insert statements for the RideRecord table
 INSERT INTO RideRecord (pickupLandmarkId, dropLandmarkId, userId, VIN) VALUES
