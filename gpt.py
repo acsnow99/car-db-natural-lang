@@ -1,8 +1,7 @@
-import os
 import requests
-from main import Database
+from db import Database
 
-api_key = os.getenv('')
+api_key = ''
 url = 'https://api.openai.com/v1/chat/completions'
 
 auth = {
@@ -10,20 +9,21 @@ auth = {
     'Accept': 'application/json'
 }
 
-content = {
+database = Database('taxi.db')
+
+def takingPrompt(prompt):
+    response = requests.post(url, headers=auth, json={
     "model": "gpt-4",
-    "messages": [ 
+    "messages": [
         {"role": "system", "content": "haha"},
-        {"role": "user", "content": "Write a sql query"}
+        {"role": "user", "content": f"{prompt}"}
     ],
     "max_tokens": 100
-}
+    })
 
-response = requests.post(url, headers=auth, json=content)
-database = Database('taxi.db')
-def pushToDatabase():
     if response.status_code == 200:
-        temp = response.json()
+        print(f"Failed {response}")
+        temp = response.json()["choices"][0]["message"]["content"]
         try:
             result = database.execute(temp)
             print("Query Result:")
@@ -31,4 +31,4 @@ def pushToDatabase():
         except Exception as error:
             print({error})
     else:
-        print(f"Failed")
+        print(f"Failed {response.status_code}")
